@@ -37,7 +37,7 @@ const getStoryCallbackHell = (callback) => {
 // - Each .then() should: read the next file, push to storyParts, return the next read
 // - The final .then() should join and return the complete story
 // - Don't forget .catch() for error handling!
-const readFileSequentially = () => {
+const readFileSequentially = (callback) => {
   const storyParts = [];
   return fs.readFile(getPath('story-part-1.txt'), 'utf-8')
     .then((part1) => {
