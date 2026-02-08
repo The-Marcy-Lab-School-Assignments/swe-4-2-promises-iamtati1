@@ -41,17 +41,27 @@ const readFileSequentially = (callback) => {
   const storyParts = [];
   return fs.readFile(getPath('story-part-1.txt'), 'utf-8')
     .then((part1) => {
+      storyParts.push(part1)
+      return fs.readFile(getPath('story-part-2.txt'), 'utf-8')
     })
     .then((part2) => {
+      storyParts.push(part2)
+      return fs.readFile(getPath('story-part-3.txt'), 'utf-8')
     })
     .then((part3) => {
+      storyParts.push(part3)
+      return fs.readFile(getPath('story-part-4.txt'), 'utf-8')
     })
     .then((part4) => {
+      storyParts.push(part4)
+      storyParts.join('\n')
+      return storyParts.join('\n');
     })
     .catch((err) => {
       console.error(err);
     });
 };
+
 
 // TODO: Rewrite using Promise.all - read all files in parallel
 // Hints:
@@ -60,6 +70,18 @@ const readFileSequentially = (callback) => {
 // - Use .then() to join the parts after Promise.all resolves
 // - Don't forget .catch() for error handling!
 const readFilesParallel = () => {
+  return Promise.all([
+    fs.readFile(getPath('story-part-1.txt'), 'utf-8'),
+    fs.readFile(getPath('story-part-2.txt'), 'utf-8'),
+    fs.readFile(getPath('story-part-3.txt'), 'utf-8'),
+    fs.readFile(getPath('story-part-4.txt'), 'utf-8')
+  ])
+    .then((parts) => {
+      return parts.join('\n')
+    })
+    .catch((err) => {
+      console.error(err)
+    })
 };
 
 module.exports = {
